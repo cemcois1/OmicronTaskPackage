@@ -50,6 +50,9 @@ public class InputControlller : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0)) //butona butona basti
                 {
+                    startPosition = currentPosition = Vector3.zero;
+                    DistanceX = 0;
+                    DistanceY = 0;
                     IsInputTakeable = true;
                     startPosition = Input.mousePosition;
                     if (isFirsttime)
@@ -77,9 +80,7 @@ public class InputControlller : MonoBehaviour
 
                 if (Input.GetMouseButtonUp(0))
                 {
-                    startPosition = currentPosition = Vector3.zero;
-                    DistanceX = 0;
-                    DistanceY = 0;
+
                     IsInputTakeable = false;
                 }
 
