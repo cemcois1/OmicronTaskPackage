@@ -97,7 +97,7 @@ public class HumanThrowController : MonoBehaviour
         });
 
         //Logic
-        DOTween.Sequence().AppendInterval(ThrowDuration  / 20).AppendCallback(() =>
+        DOTween.Sequence().AppendInterval(ThrowDuration  / 50).AppendCallback(() =>
         {
             var component = ThrowableObject.GetComponent<Rigidbody>();
             component.isKinematic = false;
