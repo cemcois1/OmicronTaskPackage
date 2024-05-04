@@ -86,12 +86,13 @@ namespace _SpesficCode.UI
         {
             progressBar.DOKill(false);
             var fillDuration = (fillrate - progressBar.fillAmount)/fullyFillDuration;
-            progressBar.DOFillAmount(fillrate, fillDuration).SetEase(Ease.Linear);
-            if (progressBar.fillAmount >= 1)
+            progressBar.DOFillAmount(fillrate, fillDuration).SetEase(Ease.Linear).OnComplete(() =>
             {
-                GameManager.levelWined?.Invoke();
-                
-            }
+                if (progressBar.fillAmount >= 1)
+                {
+                    GameManager.levelWined?.Invoke();
+                }
+            });
 
             percentageText.text = "%"+(fillrate * 100).ToString("F0");
             

@@ -15,7 +15,6 @@ public class FallTrigger : MonoBehaviour
         if (hittableObject != null)
         {
             currentFallableObjectCount += 1;
-            Debug.Log("Progress is "+currentFallableObjectCount/MaxFallableObjectCount);
             UIManager.Instance.UpdateProgressbar(currentFallableObjectCount / MaxFallableObjectCount);
             other.enabled = false;
             hittableObject.Hit(transform.position);
