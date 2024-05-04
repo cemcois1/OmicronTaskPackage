@@ -32,29 +32,15 @@ MonoBehaviour:
     assemblyNames:
     - Assembly-CSharp
     - CW.Common
-    - Dreamteck.Splines
-    - Dreamteck.Splines.Editor
-    - Dreamteck.Utilities
-    - Dreamteck.Utilities.Editor
     - EnhancedHierarchyEditor
-    - GrabbitAssembly
-    - MoreMountains.NiceVibrations
-    - MoreMountains.NiceVibrations.Demos
-    - MoreMountains.NiceVibrations.Editor
-    - MoreMountains.NiceVibrations.Haptics
     - PaintIn3D
-    - ParticleImage
-    - ParticleImage.Editor
     - Sirenix.OdinInspector.CompatibilityLayer
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - Sirenix.OdinInspector.Modules.UnityMathematics
-    - Tayx.Graphy
-    - Tayx.Graphy.Editor
     - ToonyColorsPro.Demo.Editor
     - ToonyColorsPro.Editor
     - ToonyColorsPro.Runtime
     - ToonyColorsPro2.Demo
-    - vhacd
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

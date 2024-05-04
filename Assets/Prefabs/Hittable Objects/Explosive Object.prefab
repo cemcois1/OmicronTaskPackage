@@ -133,7 +133,7 @@ MonoBehaviour:
   particle: {fileID: 5089473971190041735}
   explotionRadius: 6
   triggerOtherRadius: 0.5
-  force: 1000
+  force: 550
   exploded: 0
   explotionParticle: {fileID: 1129353498979422985}
   meshRenderer: {fileID: 8961432859299111102}
