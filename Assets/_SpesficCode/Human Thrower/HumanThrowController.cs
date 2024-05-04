@@ -43,10 +43,8 @@ public class HumanThrowController : MonoBehaviour
     [FoldoutGroup("Bullet")] [SerializeField] private float maxYValue;
     [FoldoutGroup("Bullet")] [ReadOnly][SerializeField]private  Vector3 ForceVector;
     [FoldoutGroup("Bullet")] [SerializeField]private  float SensitivityX=1.5f;
+    [SerializeField] private float additionalZLimit=5;
 
-
-
-    
 
     [FoldoutGroup("Editor")] 
     [Button]
@@ -74,6 +72,7 @@ public class HumanThrowController : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             BindHumanToBelt();
+            customLineRenderer.ShowLine();
         }
         if (inputController.IsInputTakeable)
         {
@@ -84,18 +83,25 @@ public class HumanThrowController : MonoBehaviour
             var clampedTargetPos = new Vector3(Mathf.Clamp(targetPos.x, minimumPosition.x, maxPosition.x),
                 targetPos.y, Mathf.Clamp(targetPos.z, minimumPosition.y, maxPosition.y));
             SlingBelt.position = Vector3.Lerp(SlingBelt.position, clampedTargetPos, BeltMovementSpeed * Time.deltaTime);
-
+            
+            //buraya kadar tamam
+            
             ForceVector = (hitPoint.position - dragStartPos).normalized;
             
             //Calculate Power and Draw Line
             var distanceZ= Mathf.Abs(SlingBelt.position.z- dragStartPos.z);
+
+            var powerRatio = (distanceZ > MaxReturnDistance ? MaxReturnDistance : distanceZ) / MaxReturnDistance;
+            
             //0 ile 1 arasında olan değeri -1 ile 1 arasına çevir
             var xPosRatio = StaticMethods.GetLerpedValue(minimumPosition.x, maxPosition.x, SlingBelt.position.x, 0, 1);
-            
-            var powerRatio = (distanceZ > MaxReturnDistance ? MaxReturnDistance : distanceZ) / MaxReturnDistance;
-            Debug.Log(powerRatio);
-            hitPoint.position= new Vector3(Mathf.Lerp(minimumPosition.x,maxPosition.x, 1-xPosRatio)*SensitivityX, Mathf.Lerp(hitPointStartPos.y, maxYValue, powerRatio),
-                Mathf.Lerp(transform.position.z, hitPointStartPos.z, powerRatio));
+            var hitXposition = Mathf.Lerp(minimumPosition.x, maxPosition.x, 1 - xPosRatio) * SensitivityX;
+            var hitYPos = Mathf.Lerp(hitPointStartPos.y, maxYValue, powerRatio);
+
+
+
+            hitPoint.position= new Vector3(hitXposition, hitYPos,
+                Mathf.Lerp( hitPointStartPos.z, hitPointStartPos.z+additionalZLimit, powerRatio));
             //Draw Line
             customLineRenderer.DrawLine(dragStartPos,hitPoint.position);
 
@@ -103,7 +109,8 @@ public class HumanThrowController : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            ThrowObject(ForceVector);
+            customLineRenderer.HideLine();
+           ThrowObject(ForceVector);
         }
     }
 
