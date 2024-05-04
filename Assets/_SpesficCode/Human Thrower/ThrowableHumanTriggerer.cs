@@ -12,6 +12,9 @@ namespace _SpesficCode.Human_Thrower
         [SerializeField] private float forcePower=50;
 
         [SerializeField] private float explosionTriggerRadius=2;
+
+        [SerializeField] private float softForceArea=8;
+        [SerializeField] private float softForcePower=10;
         
         private void OnCollisionEnter(Collision other)
         {
@@ -20,7 +23,18 @@ namespace _SpesficCode.Human_Thrower
                 hitableObject.Hit(other.transform.position);
                 isTriggered = true;
                 particle.Play();
+                //yakındaki rigidbodylere soft force uygula
+                Collider[] softForceColliders = Physics.OverlapSphere(transform.position, softForceArea);
+                foreach (var collider in softForceColliders)
+                {
+                    if (collider.TryGetComponent(out Rigidbody rb))
+                    {
+                        rb.AddExplosionForce(softForcePower, transform.position, softForceArea);
+                        rb.isKinematic = false;
+                    }
+                }
                 //yakındaki rigidbodylere force uygula
+
                 Collider[] colliders = Physics.OverlapSphere(transform.position, forceRadius);
                 foreach (var collider in colliders)
                 {
@@ -29,6 +43,7 @@ namespace _SpesficCode.Human_Thrower
                         rb.AddExplosionForce(forcePower, transform.position, forceRadius);
                     }
                 }
+
             }
 
             //yakındaki patlayabilir objeleri patlat
@@ -48,6 +63,8 @@ namespace _SpesficCode.Human_Thrower
             Gizmos.DrawWireSphere(transform.position, forceRadius);
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, explosionTriggerRadius);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, softForceArea);
         }
     }
 }

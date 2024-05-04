@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 7902896146464069750}
   animator: {fileID: 5603757884239888684}
+  collider: {fileID: 6700444241479823564}
   idleKey: Idle
   throwIdleKey: ThrowIdle
   throwKey: Throw
@@ -151,7 +152,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.49999997
   m_Height: 2.99
@@ -170,8 +171,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 8169545542767224533}
-  forceArea: 1
-  forcePower: 500
+  forceRadius: 1
+  forcePower: 750
+  explosionTriggerRadius: 2
+  softForceArea: 8
+  softForcePower: 10
 --- !u!1001 &2827828444394489420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -273,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d125cce8cbafcde4592ea3f26c2a23cf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5
+      value: -1.24
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d125cce8cbafcde4592ea3f26c2a23cf, type: 3}
       propertyPath: m_LocalPosition.z

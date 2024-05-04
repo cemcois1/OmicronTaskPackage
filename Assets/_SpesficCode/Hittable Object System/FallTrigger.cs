@@ -14,10 +14,14 @@ public class FallTrigger : MonoBehaviour
         IHitableObject hittableObject = other.GetComponent<IHitableObject>();
         if (hittableObject != null)
         {
-            currentFallableObjectCount += 1;
-            UIManager.Instance.UpdateProgressbar(currentFallableObjectCount / MaxFallableObjectCount);
-            other.enabled = false;
-            hittableObject.Droped(other.transform.position);
+            if (hittableObject is not  ExplodeHittableObject hittableObject1)
+            {
+                currentFallableObjectCount += 1;
+                UIManager.Instance.UpdateProgressbar(currentFallableObjectCount / MaxFallableObjectCount);
+                other.enabled = false;
+                hittableObject.Droped(other.transform.position);
+            }
+
         }
     }
 }

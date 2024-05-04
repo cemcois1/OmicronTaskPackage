@@ -8,7 +8,10 @@ namespace _SpesficCode.Human_Thrower
     public class ThrowableHuman:MonoBehaviour
     {
         [FindInChildren][SerializeField] private Rigidbody rigidbody;
-        [FindInParent][SerializeField] private Animator animator;
+        [FindInParent][SerializeField] private Animator animator; 
+        [FindInParent][SerializeField] private Collider collider;
+
+        
         //ıdle ,fırlatma ıdle ve fırlatma için animasyon keyleri
         [SerializeField] private string idleKey;
         [SerializeField] private string throwIdleKey;
@@ -19,6 +22,7 @@ namespace _SpesficCode.Human_Thrower
             rigidbody.isKinematic = false;
             rigidbody.AddForce(ThrowForce, ForceMode.Force);
             animator.SetTrigger(throwKey);
+            collider.enabled = true;
         }
         public void ThrowableIdleAnim()
         {

@@ -35,7 +35,7 @@ public class AmmoController : MonoBehaviour
         var reloadSequence = DOTween.Sequence(this);
         if (throwableHumans.Count == 0)
         {
-            Debug.LogError("There is no ammo to throw");
+            Debug.Log("There is no ammo to throw");
             throwableObject = null;
             return null;
         }

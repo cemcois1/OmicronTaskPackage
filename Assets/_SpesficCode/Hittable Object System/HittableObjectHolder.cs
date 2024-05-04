@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -28,12 +29,6 @@ public class HittableObjectHolder : MonoBehaviour
     private void OnDisable()
     {
         CheckLevelFailed -= LevelFailedCoroutine;
-    }
-
-    [Button]
-    public void LevelFailedCoroutine()
-    {
-        StartCoroutine(LevelFailed());
     }
 
     private IEnumerator LevelFailed()
@@ -73,13 +68,18 @@ public class HittableObjectHolder : MonoBehaviour
         }
     }
 
+    public void LevelFailedCoroutine()
+    {
+        StartCoroutine(LevelFailed());
+    }
+
     #endregion
 
     [Button]
     public void FindHittableObjects()
     {
         hittableObjects.Clear();
-        hittableObjects.AddRange(transform.GetComponentsInChildren<HittableObject>());
+        hittableObjects.AddRange(transform.GetComponentsInChildren<HittableObject>().Where(hitableObj => hitableObj.GetType()!=typeof(ExplodeHittableObject)));
     }
 
 }

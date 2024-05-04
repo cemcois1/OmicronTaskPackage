@@ -131,11 +131,13 @@ MonoBehaviour:
   fallable: 1
   MinimumVelocityForFalling: 7
   particle: {fileID: 5089473971190041735}
-  explotionRadius: 3.57
+  explotionRadius: 6
   triggerOtherRadius: 0.5
-  force: 1500
+  force: 1000
   exploded: 0
   explotionParticle: {fileID: 1129353498979422985}
+  meshRenderer: {fileID: 8961432859299111102}
+  collider: {fileID: 4579312657937594459}
 --- !u!65 &4579312657937594459
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -239,6 +241,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198619470119606960, guid: f351eee1cc5727b48ae1d921a07378e8, type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198757625781246262, guid: f351eee1cc5727b48ae1d921a07378e8, type: 3}
+      propertyPath: moveWithTransform
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198757625781246262, guid: f351eee1cc5727b48ae1d921a07378e8, type: 3}
