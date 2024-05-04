@@ -169,6 +169,10 @@ public class HumanThrowController : MonoBehaviour
             {
                 loadseq.AppendCallback(() => BindHumanToBelt());
             }
+            else
+            {
+                HittableObjectHolder.CheckLevelFailed?.Invoke();
+            }
             
         });
 
