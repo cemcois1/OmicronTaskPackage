@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _SpesficCode.Human_Thrower;
+using _SpesficCode.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -8,13 +10,18 @@ using UnityEngine.Serialization;
 
 public class AmmoController : MonoBehaviour
 {
-    [SerializeField] private List<ThrowableHuman> throwableHumans;
+    public List<ThrowableHuman> throwableHumans;
     [SerializeField] private Transform throwTransform;
     
     [SerializeField] private float reloadTime = 0.5f;
     [SerializeField] private float startDelay=1f;
     [SerializeField] private float jumpPower=3f;
-    
+
+    private void OnEnable()
+    {
+        //UIManager.Instance.UpdateBulletCount(throwableHumans.Count);   
+    }
+
     [Button]
     public void FindInChilds()
     {
@@ -35,7 +42,10 @@ public class AmmoController : MonoBehaviour
         reloadSequence.AppendInterval(startDelay);
         reloadSequence.AppendCallback(() => throwableHumans[0].JumpAnim());
         reloadSequence.Append(throwableHumans[0].transform.DOJump(throwTransform.position, jumpPower,1, reloadTime));
-        reloadSequence.AppendCallback(() => throwableHumans.RemoveAt(0));
+        reloadSequence.AppendCallback(() =>
+        {
+            throwableHumans.RemoveAt(0);
+        });
         throwableObject = throwableHumans[0].gameObject;
         return reloadSequence;
 

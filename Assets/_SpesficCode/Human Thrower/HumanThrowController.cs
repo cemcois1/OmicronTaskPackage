@@ -1,5 +1,6 @@
 using _GenericPackageStart.Code._Mechanic.CustomAttributes.FinInParentAttribute;
 using _SpesficCode.Human_Thrower;
+using _SpesficCode.UI;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -62,7 +63,8 @@ public class HumanThrowController : MonoBehaviour
     {
         dragStartPos = SlingBelt.position;
         hitPointStartPos = hitPoint.position;
-        
+
+        UIManager.Instance.UpdateBulletCount(ammoController.throwableHumans.Count);
         var loadseq=ammoController.LoadAmmo(out ThrowableObject);
         if (loadseq != null)
         {
@@ -143,6 +145,8 @@ public class HumanThrowController : MonoBehaviour
         {
             objectThrowing = true;
             objectLoaded = false;
+            UIManager.Instance.UpdateBulletCount(ammoController.throwableHumans.Count);
+
         });
         //calculate distance
         var distance = Vector3.Distance(SlingBelt.position, dragStartPos);

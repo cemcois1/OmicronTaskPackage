@@ -17,7 +17,7 @@ public class FallTrigger : MonoBehaviour
             currentFallableObjectCount += 1;
             UIManager.Instance.UpdateProgressbar(currentFallableObjectCount / MaxFallableObjectCount);
             other.enabled = false;
-            hittableObject.Droped(transform.position);
+            hittableObject.Droped(other.transform.position);
         }
     }
 }

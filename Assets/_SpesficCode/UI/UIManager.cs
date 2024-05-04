@@ -100,6 +100,22 @@ namespace _SpesficCode.UI
 
         #endregion
 
+        #region BulletCount UI
+
+        [SerializeField] private TextMeshProUGUI bulletCountText;
+        public void UpdateBulletCount(int bulletCount)
+        {
+            bulletCountText.text = bulletCount+" Shot Left";
+            
+            if (bulletCount ==0)
+            {
+                bulletCountText.text = "No More Shots";
+            }
+        }
+        
+
+        #endregion
+
         private void OnEnable()
         {
             GameManager.levelWined += ShowLevelWinCanvas;
