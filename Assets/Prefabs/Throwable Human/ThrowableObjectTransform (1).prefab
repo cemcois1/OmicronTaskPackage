@@ -170,6 +170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 8169545542767224533}
+  forceArea: 1
+  forcePower: 500
 --- !u!1001 &2827828444394489420
 PrefabInstance:
   m_ObjectHideFlags: 0

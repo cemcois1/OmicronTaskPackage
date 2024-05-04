@@ -1,14 +1,17 @@
-﻿using _GenericPackageStart.Code._Mechanic.CustomAttributes.FinInParentAttribute;
+﻿using System;
+using _GenericPackageStart.Code._Mechanic.CustomAttributes.FinInParentAttribute;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class HittableObject : MonoBehaviour,IHitableObject
 {
     [FindInParent][SerializeField] private Rigidbody rigidbody;
     [SerializeField] private bool fallable=true;
     [SerializeField] private float MinimumVelocityForFalling = 7;
-    [SerializeField] private ParticleSystem particle;
+    [SerializeField] protected ParticleSystem particle;
+
     
-    public void Hit(Vector3 hitPos)
+    public virtual void Hit(Vector3 hitPos)
     {
         Debug.Log("Hit");
     }
@@ -34,4 +37,5 @@ public class HittableObject : MonoBehaviour,IHitableObject
             return rigidbody.velocity.magnitude >MinimumVelocityForFalling;
         } 
     }
+
 }
