@@ -9,15 +9,17 @@ public class HittableObjectHolder : MonoBehaviour
 {
     [SerializeField] private List<HittableObject> hittableObjects;
     [SerializeField] private int fallableObjectCount;
+    [SerializeField] private FallTrigger fallTrigger;
     
     private void Awake()
     {
-        fallableObjectCount = hittableObjects.Count;
+        fallTrigger.MaxFallableObjectCount = fallableObjectCount = hittableObjects.Count;
     }
 
     [Button]
     public void FindHittableObjects()
     {
+        hittableObjects.Clear();
         hittableObjects.AddRange(transform.GetComponentsInChildren<HittableObject>());
     }
     

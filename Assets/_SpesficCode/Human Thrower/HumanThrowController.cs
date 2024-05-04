@@ -3,6 +3,7 @@ using _SpesficCode.Human_Thrower;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class HumanThrowController : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class HumanThrowController : MonoBehaviour
 
     private void Update()
     {
-        if (objectThrowing)
+        if (objectThrowing||EventSystem.current.IsPointerOverGameObject())
         {
             return;
         }

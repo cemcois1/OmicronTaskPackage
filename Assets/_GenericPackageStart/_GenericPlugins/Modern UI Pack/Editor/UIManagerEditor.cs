@@ -8,7 +8,6 @@ using UnityEditor.Presets;
 #if UNITY_EDITOR
 namespace Michsky.UI.ModernUIPack
 {
-    [CustomEditor(typeof(UIManager))]
     [System.Serializable]
     public class UIManagerEditor : Editor
     {
