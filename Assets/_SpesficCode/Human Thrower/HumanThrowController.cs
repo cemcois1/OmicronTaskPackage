@@ -132,6 +132,8 @@ public class HumanThrowController : MonoBehaviour
     {
         objectLoaded = true;
         ThrowableObject.transform.SetParent(SlingBelt, true);
+        var human = ThrowableObject.GetComponent<ThrowableHuman>();
+        human.ThrowableIdleAnim();
     }
     private void ThrowObject(Vector3 forceVector)
     {

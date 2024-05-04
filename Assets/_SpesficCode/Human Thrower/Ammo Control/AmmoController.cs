@@ -33,6 +33,7 @@ public class AmmoController : MonoBehaviour
             return null;
         }
         reloadSequence.AppendInterval(startDelay);
+        reloadSequence.AppendCallback(() => throwableHumans[0].JumpAnim());
         reloadSequence.Append(throwableHumans[0].transform.DOJump(throwTransform.position, jumpPower,1, reloadTime));
         reloadSequence.AppendCallback(() => throwableHumans.RemoveAt(0));
         throwableObject = throwableHumans[0].gameObject;

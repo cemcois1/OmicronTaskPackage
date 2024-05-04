@@ -88,7 +88,7 @@ namespace _SpesficCode.UI
             var fillDuration = StaticMethods.GetLerpedValue(0, 1, (fillrate - progressBar.fillAmount), 0, fullyFillDuration);
             progressBar.DOFillAmount(fillrate, fillDuration).SetEase(Ease.Linear).OnComplete(() =>
             {
-                if (progressBar.fillAmount >= 1)
+                if (progressBar.fillAmount >= 1&&!GameManager.instance.LevelFinished)
                 {
                     GameManager.levelWined?.Invoke();
                 }

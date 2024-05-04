@@ -62,9 +62,11 @@ public class HittableObjectHolder : MonoBehaviour
             }
         }
 
+        yield return new WaitForSeconds(4);
+
         //hittableObjectsin bütün elemanları düştüymediyse değilse level failed
         hittableObjects.RemoveAll(x => !x.gameObject.activeInHierarchy);
-        if (hittableObjects.Count != 0)
+        if (hittableObjects.Count != 0&&!GameManager.instance.LevelFinished)
         {
             Debug.Log("Level Failed");
             GameManager.levelFailed?.Invoke();
