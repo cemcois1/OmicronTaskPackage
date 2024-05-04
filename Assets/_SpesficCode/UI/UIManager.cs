@@ -85,7 +85,7 @@ namespace _SpesficCode.UI
         public void UpdateProgressbar(float fillrate)
         {
             progressBar.DOKill(false);
-            var fillDuration = (fillrate - progressBar.fillAmount)/fullyFillDuration;
+            var fillDuration = StaticMethods.GetLerpedValue(0, 1, (fillrate - progressBar.fillAmount), 0, fullyFillDuration);
             progressBar.DOFillAmount(fillrate, fillDuration).SetEase(Ease.Linear).OnComplete(() =>
             {
                 if (progressBar.fillAmount >= 1)

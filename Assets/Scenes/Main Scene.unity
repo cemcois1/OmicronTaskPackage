@@ -3588,7 +3588,7 @@ MonoBehaviour:
   currentLevelText: {fileID: 1656532173}
   nextLevelText: {fileID: 540835476}
   progressBar: {fileID: 1941422540}
-  fullyFillDuration: 0.5
+  fullyFillDuration: 3
   percentageText: {fileID: 628251504}
 --- !u!1 &1595836180
 GameObject:
