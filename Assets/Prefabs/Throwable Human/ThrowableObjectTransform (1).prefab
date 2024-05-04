@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7902896146464069750}
   - component: {fileID: 8134373477265281338}
   - component: {fileID: 6700444241479823564}
+  - component: {fileID: 4847467267890227390}
   m_Layer: 0
   m_Name: ThrowableObjectTransform (1)
   m_TagString: Untagged
@@ -35,6 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2544129009189219414}
+  - {fileID: 8336991853899688123}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3432295731665293560
@@ -155,6 +157,86 @@ CapsuleCollider:
   m_Height: 2.99
   m_Direction: 1
   m_Center: {x: 0, y: -0.28, z: -0.21}
+--- !u!114 &4847467267890227390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6866816389601284975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde8c7ae990d44d6af34ccb983c6a167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particle: {fileID: 8169545542767224533}
+--- !u!1001 &2827828444394489420
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2019192501050748210}
+    m_Modifications:
+    - target: {fileID: 6092392931512364791, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092392931512364791, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092392931512364791, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092392931512364791, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092392931512364791, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092392931512364791, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092392931512364791, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092392931512364791, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092392931512364791, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092392931512364791, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6097844275902716923, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+      propertyPath: m_Name
+      value: Poof-Red
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+--- !u!198 &8169545542767224533 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6223544362805305497, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+  m_PrefabInstance: {fileID: 2827828444394489420}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8336991853899688123 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6092392931512364791, guid: 887af7bc8599eb849b5db005b3968783, type: 3}
+  m_PrefabInstance: {fileID: 2827828444394489420}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7364576248798168908
 PrefabInstance:
   m_ObjectHideFlags: 0

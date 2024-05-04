@@ -472,7 +472,7 @@ MonoBehaviour:
       m_Left: 3
       m_Right: 3
       m_Top: 2
-      m_Bottom: 3
+      m_Bottom: 1
     m_Overflow:
       m_Left: 0
       m_Right: 0
@@ -835,8 +835,7 @@ MonoBehaviour:
   TabStyle:
     m_Name: window
     m_Normal:
-      m_Background: {fileID: 3030029797350296259, guid: 0000000000000000d000000000000000,
-        type: 0}
+      m_Background: {fileID: 3030029797350296259, guid: 0000000000000000d000000000000000, type: 0}
       m_ScaledBackgrounds:
       - {fileID: -7783218991985073443, guid: 0000000000000000d000000000000000, type: 0}
       m_TextColor: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 1}
@@ -853,8 +852,7 @@ MonoBehaviour:
       m_ScaledBackgrounds: []
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_OnNormal:
-      m_Background: {fileID: 8058632875595140008, guid: 0000000000000000d000000000000000,
-        type: 0}
+      m_Background: {fileID: 8058632875595140008, guid: 0000000000000000d000000000000000, type: 0}
       m_ScaledBackgrounds:
       - {fileID: 5918955158733009358, guid: 0000000000000000d000000000000000, type: 0}
       m_TextColor: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 1}
