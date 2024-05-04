@@ -47,14 +47,17 @@ public class HittableObjectHolder : MonoBehaviour
                 break;
             }
             
+            List<HittableObject> removeList=new List<HittableObject>();
             foreach (var fall in fallingList)
             {
                 if (!fall.IsFalling)
                 {
                     //listeden sil
-                    fallingList.Remove(fall);
+
+                    removeList.Add(fall);
                 }
             }
+            fallingList.RemoveAll(x => removeList.Contains(x));
         }
 
         yield return new WaitForSeconds(4);
