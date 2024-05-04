@@ -9,6 +9,7 @@ public class HumanThrowController : MonoBehaviour
 {
     [FindInParent][SerializeField] private InputControlller inputController;
     [SerializeField] private CustomLineRenderer customLineRenderer;
+    [SerializeField] private AmmoController ammoController;
     
     [SerializeField] private GameObject ThrowableObject;
     [SerializeField] private Transform SlingBelt;
@@ -45,6 +46,7 @@ public class HumanThrowController : MonoBehaviour
     [FoldoutGroup("Bullet")] [ReadOnly][SerializeField]private  Vector3 ForceVector;
     [FoldoutGroup("Bullet")] [SerializeField]private  float SensitivityX=1.5f;
     [SerializeField] private float additionalZLimit=5;
+    [SerializeField] private bool objectLoaded;
 
 
     [FoldoutGroup("Editor")] 
@@ -60,12 +62,18 @@ public class HumanThrowController : MonoBehaviour
     {
         dragStartPos = SlingBelt.position;
         hitPointStartPos = hitPoint.position;
+        
+        var loadseq=ammoController.LoadAmmo(out ThrowableObject);
+        if (loadseq != null)
+        {
+            loadseq.AppendCallback(() => BindHumanToBelt());
+        }
     }
     
 
     private void Update()
     {
-        if (objectThrowing||EventSystem.current.IsPointerOverGameObject())
+        if (objectThrowing||EventSystem.current.IsPointerOverGameObject()|| !objectLoaded)
         {
             return;
         }
@@ -78,46 +86,51 @@ public class HumanThrowController : MonoBehaviour
         if (inputController.IsInputTakeable)
         {
             //Drag Belt
-            var additionalPosition =
-                new Vector3(inputController.DistanceX, 0, inputController.DistanceY) * DragVectorScale;
-            var targetPos = dragStartPos + additionalPosition;
-            var clampedTargetPos = new Vector3(Mathf.Clamp(targetPos.x, minimumPosition.x, maxPosition.x),
-                targetPos.y, Mathf.Clamp(targetPos.z, minimumPosition.y, maxPosition.y));
-            SlingBelt.position = Vector3.Lerp(SlingBelt.position, clampedTargetPos, BeltMovementSpeed * Time.deltaTime);
-            
-            //buraya kadar tamam
-            
-            ForceVector = (hitPoint.position - dragStartPos).normalized;
+            DragBelt();
             
             //Calculate Power and Draw Line
-            var distanceZ= Mathf.Abs(SlingBelt.position.z- dragStartPos.z);
-
-            var powerRatio = (distanceZ > MaxReturnDistance ? MaxReturnDistance : distanceZ) / MaxReturnDistance;
-            
-            //0 ile 1 arasında olan değeri -1 ile 1 arasına çevir
-            var xPosRatio = StaticMethods.GetLerpedValue(minimumPosition.x, maxPosition.x, SlingBelt.position.x, 0, 1);
-            var hitXposition = Mathf.Lerp(minimumPosition.x, maxPosition.x, 1 - xPosRatio) * SensitivityX;
-            var hitYPos = Mathf.Lerp(hitPointStartPos.y, maxYValue, powerRatio);
-
-
-
-            hitPoint.position= new Vector3(hitXposition, hitYPos,
-                Mathf.Lerp( hitPointStartPos.z, hitPointStartPos.z+additionalZLimit, powerRatio));
+            UpdateHitPoint();
             //Draw Line
             customLineRenderer.DrawLine(dragStartPos,hitPoint.position);
-
+            
         }
 
         if (Input.GetMouseButtonUp(0))
-        {
+        { 
             customLineRenderer.HideLine();
-           ThrowObject(ForceVector);
+            ThrowObject(ForceVector);
         }
+    }
+
+    private void UpdateHitPoint()
+    {
+        ForceVector = (hitPoint.position - dragStartPos).normalized;
+        var distanceZ = Mathf.Abs(SlingBelt.position.z - dragStartPos.z);
+        var powerRatio = (distanceZ > MaxReturnDistance ? MaxReturnDistance : distanceZ) / MaxReturnDistance;
+
+        //0 ile 1 arasında olan değeri -1 ile 1 arasına çevir
+        var xPosRatio = StaticMethods.GetLerpedValue(minimumPosition.x, maxPosition.x, SlingBelt.position.x, 0, 1);
+        var hitXposition = Mathf.Lerp(minimumPosition.x, maxPosition.x, 1 - xPosRatio) * SensitivityX;
+        var hitYPos = Mathf.Lerp(hitPointStartPos.y, maxYValue, powerRatio);
+
+        hitPoint.position = new Vector3(hitXposition, hitYPos,
+            Mathf.Lerp(hitPointStartPos.z, hitPointStartPos.z + additionalZLimit, powerRatio));
+    }
+
+    private void DragBelt()
+    {
+        var additionalPosition =
+            new Vector3(inputController.DistanceX, 0, inputController.DistanceY) * DragVectorScale;
+        var targetPos = dragStartPos + additionalPosition;
+        var clampedTargetPos = new Vector3(Mathf.Clamp(targetPos.x, minimumPosition.x, maxPosition.x),
+            targetPos.y, Mathf.Clamp(targetPos.z, minimumPosition.y, maxPosition.y));
+        SlingBelt.position = Vector3.Lerp(SlingBelt.position, clampedTargetPos, BeltMovementSpeed * Time.deltaTime);
     }
 
 
     private void BindHumanToBelt()
     {
+        objectLoaded = true;
         ThrowableObject.transform.SetParent(SlingBelt, true);
     }
     private void ThrowObject(Vector3 forceVector)
@@ -127,6 +140,7 @@ public class HumanThrowController : MonoBehaviour
         ThrowSequence.PrependCallback(() =>
         {
             objectThrowing = true;
+            objectLoaded = false;
         });
         //calculate distance
         var distance = Vector3.Distance(SlingBelt.position, dragStartPos);
@@ -147,6 +161,15 @@ public class HumanThrowController : MonoBehaviour
             ThrowableObject.transform.SetParent(transform, true);
             var human = ThrowableObject.GetComponent<ThrowableHuman>();
             human.Throw(forceVector * ForceMultiplyer);
+            
+            ThrowableObject = null;
+
+            var loadseq = ammoController.LoadAmmo(out ThrowableObject);
+            if (loadseq != null)
+            {
+                loadseq.AppendCallback(() => BindHumanToBelt());
+            }
+            
         });
 
     }
